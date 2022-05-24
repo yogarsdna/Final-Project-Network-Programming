@@ -1,6 +1,5 @@
 import socket
 import threading
-import tkinter as tk
 
 #Initialize server
 server = None
@@ -48,9 +47,7 @@ clientFrame.pack(side=tk.BOTTOM, pady=(5, 10))
 
 #Start server function
 def start_server():
-    global server, HOST_ADDR, HOST_PORT
-    btnStart.config(state=tk.DISABLED)
-    btnStop.config(state=tk.NORMAL)
+    global server, HOST_ADDR, HOST_PORT 
 
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -59,14 +56,10 @@ def start_server():
 
     threading._start_new_thread(accept_clients, (server, " "))
 
-    lblHost["text"] = "Address: " + HOST_ADDR
-    lblPort["text"] = "Port: " + str(HOST_PORT)
-
 #Stop server function
 def stop_server():
     global server
-    btnStart.config(state=tk.NORMAL)
-    btnStop.config(state=tk.DISABLED)
+
     server.close()
 
 #Accept client requests
@@ -79,5 +72,16 @@ def accept_clients(the_server, y):
             #Use a thread so as not to clog the gui thread
             threading._start_new_thread(send_receive_client_message, (client, addr))
 
-def send_receive_client_message():
-    pass
+def send_receive_client_message(client_connection, client_ip_addr):
+    global server, client_name, clients, player_data, player0, player1
+
+    client_msg = " "
+
+    #Send welcome message to client
+    client_name = client_connection.recv(4096).decode()
+    if len(clients) == 1:
+        client_connection.send(b"1")
+    elif len(clients) == 2:
+        client_connection.send(b"2")
+
+    clients_names.append(client_name)

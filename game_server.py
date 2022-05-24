@@ -34,6 +34,14 @@ lblPort = tk.Label(middleFrame, text = "Port:XXXX")
 lblPort.pack(side=tk.LEFT)
 middleFrame.pack(side=tk.TOP, pady=(5, 0))
 
+#The client frame
+clientFrame = tk.Frame(window)
+lblLine = tk.Label(clientFrame, text="**********Client List**********").pack()
+scrollBar = tk.Scrollbar(clientFrame)
+scrollBar.pack(side=tk.RIGHT, fill=tk.Y)
+
+
+
 #Start server function
 def start_server():
     global server, HOST_ADDR, HOST_PORT 

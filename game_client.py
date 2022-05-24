@@ -22,6 +22,16 @@ TOTAL_NO_OF_ROUNDS = 3
 your_score = 0
 opponent_score = 0
 
+#Top frame consisting of label name and a button widget 
+top_welcome_frame= tk.Frame(window_main)
+lbl_name = tk.Label(top_welcome_frame, text = "Name:")
+lbl_name.pack(side=tk.LEFT)
+ent_name = tk.Entry(top_welcome_frame)
+ent_name.pack(side=tk.LEFT)
+btn_connect = tk.Button(top_welcome_frame, text="Connect", command=lambda : connect())
+btn_connect.pack(side=tk.LEFT)
+top_welcome_frame.pack(side=tk.TOP)
+
 #Initialize variables that will be used
 your_name = ""
 opponent_name = ""

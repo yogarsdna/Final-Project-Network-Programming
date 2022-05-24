@@ -32,6 +32,15 @@ btn_connect = tk.Button(top_welcome_frame, text="Connect", command=lambda : conn
 btn_connect.pack(side=tk.LEFT)
 top_welcome_frame.pack(side=tk.TOP)
 
+#Make a line to separate top frame and middle frame 
+top_message_frame = tk.Frame(window_main)
+lbl_line = tk.Label(top_message_frame, text="***********************************************************").pack()
+lbl_welcome = tk.Label(top_message_frame, text="")
+lbl_welcome.pack()
+lbl_line_server = tk.Label(top_message_frame, text="***********************************************************")
+lbl_line_server.pack_forget()
+top_message_frame.pack(side=tk.TOP)
+
 #Initialize variables that will be used
 your_name = ""
 opponent_name = ""

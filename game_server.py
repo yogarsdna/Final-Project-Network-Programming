@@ -86,3 +86,11 @@ def send_receive_client_message(client_connection, client_ip_addr):
         client_connection.send(b"2")
 
     clients_names.append(client_name)
+
+    if len(clients) >= num_players:
+
+        #Send opponent name
+        opponent_name = "opponent_name$" + clients_names[1]
+        clients[0].send(opponent_name.encode())
+        opponent_name = "opponent_name$" + clients_names[0]
+        clients[1].send(opponent_name.encode())

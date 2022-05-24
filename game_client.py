@@ -4,11 +4,6 @@ import tkinter as tk
 from tkinter import PhotoImage
 from tkinter import messagebox
 
-#Initialize network client
-client = None
-HOST_ADDR = "127.0.0.1"
-HOST_PORT = 9090
-
 #Main Game Window 
 window_main = tk.Tk()
 window_main.title("Game Client")
@@ -21,6 +16,11 @@ opponent_choice = ""
 TOTAL_NO_OF_ROUNDS = 3
 your_score = 0
 opponent_score = 0
+
+#Initialize network client
+client = None
+HOST_ADDR = "127.0.0.1"
+HOST_PORT = 9090
 
 #Top frame consisting of label name and a button widget 
 top_welcome_frame= tk.Frame(window_main)

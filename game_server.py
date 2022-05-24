@@ -17,6 +17,15 @@ num_players = 2
 window = tk.Tk()
 window.title("Server")
 
+#Top frame
+topFrame = tk.Frame(window)
+btnStart = tk.Button(topFrame, text="Start", foreground="grey", command=lambda : start_server())
+btnStart.pack(side=tk.LEFT)
+btnStart.configure(fg="grey")
+btnStop = tk.Button(topFrame, text="Stop", foreground="grey", command=lambda : stop_server(), state=tk.DISABLED)
+btnStop.pack(side=tk.LEFT)
+topFrame.pack(side=tk.TOP, pady=(5, 0))
+
 #Start server function
 def start_server():
     global server, HOST_ADDR, HOST_PORT 

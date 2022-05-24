@@ -26,6 +26,10 @@ btnStop = tk.Button(topFrame, text="Stop", foreground="grey", command=lambda : s
 btnStop.pack(side=tk.LEFT)
 topFrame.pack(side=tk.TOP, pady=(5, 0))
 
+#Middle frame
+middleFrame = tk.Frame(window)
+lblHost = tk.Label(middleFrame, text = "Address: X.X.X.X")
+
 #Start server function
 def start_server():
     global server, HOST_ADDR, HOST_PORT 

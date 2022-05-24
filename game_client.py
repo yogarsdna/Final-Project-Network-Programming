@@ -43,8 +43,11 @@ lbl_line_server = tk.Label(top_message_frame, text="****************************
 lbl_line_server.pack_forget()
 top_message_frame.pack(side=tk.TOP)
 
-#Connect client's name :
+#Connect client's name
 def connect():
     global your_name
-    if len(your_name) < 1:
-        pass
+    if len(ent_name.get()) < 1:
+        tk.messagebox.showerror(title="ERROR!!!", message="You MUST enter your first name <e.g. John>")
+    else:
+        your_name = ent_name.get()
+        connect_to_server(your_name)

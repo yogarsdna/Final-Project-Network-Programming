@@ -13,6 +13,10 @@ clients_names = []
 player_data = []
 num_players = 2
 
+#initialize frame
+window = tk.Tk()
+window.title("Server")
+
 #Start server function
 def start_server():
     global server, HOST_ADDR, HOST_PORT 

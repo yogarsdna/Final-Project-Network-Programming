@@ -1,5 +1,6 @@
 import socket
 import threading
+import tkinter as tk
 
 #Initialize server
 server = None

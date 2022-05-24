@@ -48,7 +48,9 @@ clientFrame.pack(side=tk.BOTTOM, pady=(5, 10))
 
 #Start server function
 def start_server():
-    global server, HOST_ADDR, HOST_PORT 
+    global server, HOST_ADDR, HOST_PORT
+    btnStart.config(state=tk.DISABLED)
+    btnStop.config(state=tk.NORMAL)
 
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -57,10 +59,14 @@ def start_server():
 
     threading._start_new_thread(accept_clients, (server, " "))
 
+    lblHost["text"] = "Address: " + HOST_ADDR
+    lblPort["text"] = "Port: " + str(HOST_PORT)
+
 #Stop server function
 def stop_server():
     global server
-
+    btnStart.config(state=tk.NORMAL)
+    btnStop.config(state=tk.DISABLED)
     server.close()
 
 #Accept client requests

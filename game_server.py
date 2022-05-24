@@ -39,8 +39,11 @@ clientFrame = tk.Frame(window)
 lblLine = tk.Label(clientFrame, text="**********Client List**********").pack()
 scrollBar = tk.Scrollbar(clientFrame)
 scrollBar.pack(side=tk.RIGHT, fill=tk.Y)
-
-
+tkDisplay = tk.Text(clientFrame, height=10, width=30)
+tkDisplay.pack(side=tk.LEFT, fill=tk.Y, padx=(5, 0))
+scrollBar.config(command=tkDisplay.yview)
+tkDisplay.config(yscrollcommand=scrollBar.set, background="#F4F6F7", highlightbackground="grey", state="disabled")
+clientFrame.pack(side=tk.BOTTOM, pady=(5, 10))
 
 #Start server function
 def start_server():

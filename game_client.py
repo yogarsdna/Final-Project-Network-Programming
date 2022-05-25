@@ -51,3 +51,26 @@ def connect():
     else:
         your_name = ent_name.get()
         connect_to_server(your_name)
+
+#Connect to the server
+def connect_to_server(name):
+    global client, HOST_PORT, HOST_ADDR, your_name
+    try:
+        client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        client.connect((HOST_ADDR, HOST_PORT))
+        client.send(name.encode()) 
+
+        threading._start_new_thread(receive_message_from_server, (client, "m"))
+
+    except Exception as e:
+        tk.messagebox.showerror(title="ERROR!!!", message="Cannot connect to host: " + HOST_ADDR + " on port: " + str(HOST_PORT) + " Server may be Unavailable. Try again later")
+
+#Receive message from the server
+def receive_message_from_server(sck, m):
+    global your_name, opponent_name, game_round
+    global your_choice, opponent_choice, your_score, opponent_score
+
+    while True:
+        from_server = sck.recv(4096).decode()
+
+        if not from_server: break

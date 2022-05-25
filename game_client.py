@@ -74,3 +74,11 @@ def receive_message_from_server(sck, m):
         from_server = sck.recv(4096).decode()
 
         if not from_server: break
+
+        if from_server.startswith("welcome"):
+            if from_server == "welcome1":
+                lbl_welcome["text"] = "Server says: Welcome " + your_name + "! Waiting for player 2"
+            elif from_server == "welcome2":
+                lbl_welcome["text"] = "Server says: Welcome " + your_name + "! Game will start soon"
+            lbl_line_server.pack()
+        

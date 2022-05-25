@@ -1,6 +1,7 @@
 import tkinter as tk
 import socket
 import threading
+from time import sleep
 
 #Initialize server
 server = None
@@ -86,11 +87,60 @@ def send_receive_client_message(client_connection, client_ip_addr):
         client_connection.send(b"2")
 
     clients_names.append(client_name)
+    update_client_names_display(clients_names) 
 
     if len(clients) >= num_players:
+        sleep(1)
 
         #Send opponent name
         opponent_name = "opponent_name$" + clients_names[1]
         clients[0].send(opponent_name.encode())
         opponent_name = "opponent_name$" + clients_names[0]
         clients[1].send(opponent_name.encode())
+    
+    while True:
+        data = client_connection.recv(4096).decode()
+        if not data: break
+
+        #Get the player choice from received data
+        player_choice = data[11:len(data)]
+
+        msg = {
+            "choice": player_choice,
+            "socket": client_connection
+        }
+
+        if len(player_data) < num_players:
+            player_data.append(msg)
+
+        if len(player_data) == num_players:
+            #Send player 1 choice to player 2 and vice versa
+        
+
+            player_data = []
+
+    #Find the client index then remove from both lists(client name list and connection list)
+    idx = get_client_index(clients, client_connection)
+    del clients_names[idx]
+    del clients[idx]
+    client_connection.close()
+
+    update_client_names_display(clients_names)  
+
+def get_client_index(client_list, curr_client):
+    idx = 0
+    for conn in client_list:
+        if conn == curr_client:
+            break
+        idx = idx + 1
+
+    return idx
+
+def update_client_names_display(name_list):
+    tkDisplay.config(state=tk.NORMAL)
+    tkDisplay.delete('1.0', tk.END)
+
+    for c in name_list:
+        tkDisplay.insert(tk.END, c+"\n")
+    tkDisplay.config(state=tk.DISABLED)
+

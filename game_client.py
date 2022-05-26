@@ -91,7 +91,6 @@ def receive_message_from_server(sck, m):
         
         elif from_server.startswith(":"):
             opponent_name = from_server.replace("opponent_name$", "")
-        
             #We know two users are connected so game is ready to start
     
             lbl_welcome.config(state=tk.DISABLED)
@@ -101,7 +100,6 @@ def receive_message_from_server(sck, m):
             #Get the opponent choice from the server
             opponent_choice = from_server.replace("$opponent_choice", "")
 
-        
-        sck.close()
+    sck.close()
 
 window_main.mainloop()

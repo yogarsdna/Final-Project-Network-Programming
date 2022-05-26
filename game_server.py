@@ -121,6 +121,11 @@ def send_receive_client_message(client_connection, client_ip_addr):
 
         if len(player_data) == num_players:
             #Send player 1 choice to player 2 and vice versa
+            opponent_choice = "1:" + player_data[1].get("choice")
+            player_data[0].get("socket").send(opponent_choice.encode())
+
+            opponent_choice = "0:" + player_data[0].get("choice")
+            player_data[1].get("socket").send(opponent_choice.encode())
         
 
             player_data = []

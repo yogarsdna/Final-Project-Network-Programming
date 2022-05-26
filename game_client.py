@@ -3,6 +3,7 @@ import threading
 import tkinter as tk
 from tkinter import PhotoImage
 from tkinter import messagebox
+from time import sleep
 
 #Main Game Window 
 window_main = tk.Tk()
@@ -60,6 +61,12 @@ def connect_to_server(name):
         client.connect((HOST_ADDR, HOST_PORT))
         client.send(name.encode()) 
 
+         #Disable widgets
+        btn_connect.config(state=tk.DISABLED)
+        ent_name.config(state=tk.DISABLED)
+        lbl_name.config(state=tk.DISABLED)
+
+
         threading._start_new_thread(receive_message_from_server, (client, "m"))
 
     except Exception as e:
@@ -82,3 +89,19 @@ def receive_message_from_server(sck, m):
                 lbl_welcome["text"] = "Server says: Welcome " + your_name + "! Game will start soon"
             lbl_line_server.pack()
         
+        elif from_server.startswith(":"):
+            opponent_name = from_server.replace("opponent_name$", "")
+        
+            #We know two users are connected so game is ready to start
+    
+            lbl_welcome.config(state=tk.DISABLED)
+            lbl_line_server.config(state=tk.DISABLED)
+
+        elif from_server.startswith("$opponent_choice"):
+            #Get the opponent choice from the server
+            opponent_choice = from_server.replace("$opponent_choice", "")
+
+        
+        sck.close()
+
+window_main.mainloop()

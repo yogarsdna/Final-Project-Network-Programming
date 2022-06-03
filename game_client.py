@@ -81,6 +81,16 @@ lbl_result = tk.Label(round_frame, text=" ", foreground="blue", font = "Helvetic
 lbl_result.pack()
 round_frame.pack(side=tk.TOP)
 
+#Make a final frame to separate the game information and rock, paper, and scissors buttons
+final_frame = tk.Frame(middle_frame)
+lbl_line = tk.Label(final_frame, text="***********************************************************").pack()
+lbl_final_result = tk.Label(final_frame, text=" ", font = "Helvetica 13 bold", foreground="blue")
+lbl_final_result.pack()
+lbl_line = tk.Label(final_frame, text="***********************************************************").pack()
+final_frame.pack(side=tk.TOP)
+
+middle_frame.pack_forget()
+
 #Make buttons
 def enable_disable_buttons(todo):
     if todo == "disable":

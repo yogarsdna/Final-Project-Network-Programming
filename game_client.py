@@ -91,6 +91,12 @@ final_frame.pack(side=tk.TOP)
 
 middle_frame.pack_forget()
 
+#Display the buttons
+button_frame = tk.Frame(window_main)
+photo_rock = PhotoImage(file=r"rock.gif")
+photo_paper = PhotoImage(file = r"paper.gif")
+photo_scissors = PhotoImage(file = r"scissors.gif")
+
 #Make buttons
 def enable_disable_buttons(todo):
     if todo == "disable":

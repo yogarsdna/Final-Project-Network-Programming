@@ -44,6 +44,15 @@ lbl_line_server = tk.Label(top_message_frame, text="****************************
 lbl_line_server.pack_forget()
 top_message_frame.pack(side=tk.TOP)
 
+#Make a frame on the left for the client's name and opponents 
+top_frame = tk.Frame(window_main)
+top_left_frame = tk.Frame(top_frame, highlightbackground="green", highlightcolor="green", highlightthickness=1)
+lbl_your_name = tk.Label(top_left_frame, text="Your name: " + your_name, font = "Helvetica 13 bold")
+lbl_opponent_name = tk.Label(top_left_frame, text="Opponent: " + opponent_name)
+lbl_your_name.grid(row=0, column=0, padx=5, pady=8)
+lbl_opponent_name.grid(row=1, column=0, padx=5, pady=8)
+top_left_frame.pack(side=tk.LEFT, padx=(10, 10))
+
 #Make buttons
 def enable_disable_buttons(todo):
     if todo == "disable":

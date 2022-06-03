@@ -63,6 +63,12 @@ top_right_frame.pack(side=tk.RIGHT, padx=(10, 10))
 
 top_frame.pack_forget()
 
+#Middle frame consisting "GAME LOG" text 
+middle_frame = tk.Frame(window_main)
+lbl_line = tk.Label(middle_frame, text="***********************************************************").pack()
+lbl_line = tk.Label(middle_frame, text="**** GAME LOG ****", font = "Helvetica 13 bold", foreground="blue").pack()
+lbl_line = tk.Label(middle_frame, text="***********************************************************").pack()
+
 #Make buttons
 def enable_disable_buttons(todo):
     if todo == "disable":

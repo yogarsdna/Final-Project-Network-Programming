@@ -44,6 +44,13 @@ lbl_line_server = tk.Label(top_message_frame, text="****************************
 lbl_line_server.pack_forget()
 top_message_frame.pack(side=tk.TOP)
 
+#Make buttons
+def enable_disable_buttons(todo):
+    if todo == "disable":
+        pass
+    else:
+        pass
+
 #Connect client's name
 def connect():
     global your_name
@@ -52,6 +59,16 @@ def connect():
     else:
         your_name = ent_name.get()
         connect_to_server(your_name)
+
+#Make count down function for the timer
+def count_down(my_timer, nothing):
+    global game_round
+    if game_round <= TOTAL_NO_OF_ROUNDS:
+        game_round = game_round + 1
+
+    while my_timer > 0:
+        pass
+    enable_disable_buttons("enable")
 
 #Connect to the server
 def connect_to_server(name):

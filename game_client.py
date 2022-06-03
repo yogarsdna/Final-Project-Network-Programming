@@ -97,6 +97,15 @@ photo_rock = PhotoImage(file=r"rock.gif")
 photo_paper = PhotoImage(file = r"paper.gif")
 photo_scissors = PhotoImage(file = r"scissors.gif")
 
+#Make a frame for the buttons 
+btn_rock = tk.Button(button_frame, text="Rock", command=lambda : choice("rock"), state=tk.DISABLED, image=photo_rock)
+btn_paper = tk.Button(button_frame, text="Paper", command=lambda : choice("paper"), state=tk.DISABLED, image=photo_paper)
+btn_scissors = tk.Button(button_frame, text="Scissors", command=lambda : choice("scissors"), state=tk.DISABLED, image=photo_scissors)
+btn_rock.grid(row=0, column=0)
+btn_paper.grid(row=0, column=1)
+btn_scissors.grid(row=0, column=2)
+button_frame.pack(side=tk.BOTTOM)
+
 #Make buttons
 def enable_disable_buttons(todo):
     if todo == "disable":

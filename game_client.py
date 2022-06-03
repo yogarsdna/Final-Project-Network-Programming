@@ -106,6 +106,34 @@ btn_paper.grid(row=0, column=1)
 btn_scissors.grid(row=0, column=2)
 button_frame.pack(side=tk.BOTTOM)
 
+#Rock, paper, scissors logic
+def game_logic(you, opponent):
+    winner = ""
+    rock = "rock"
+    paper = "paper"
+    scissors = "scissors"
+    player0 = "you"
+    player1 = "op1"
+
+    if you == opponent:
+        winner = "draw"
+    elif you == rock:
+        if opponent == paper:
+            winner = player1
+        else:
+            winner = player0
+    elif you == scissors:
+        if opponent == rock:
+            winner = player1
+        else:
+            winner = player0
+    elif you == paper:
+        if opponent == scissors:
+            winner = player1
+        else:
+            winner = player0
+    return winner
+
 #Make buttons
 def enable_disable_buttons(todo):
     if todo == "disable":

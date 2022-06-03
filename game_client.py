@@ -69,6 +69,18 @@ lbl_line = tk.Label(middle_frame, text="****************************************
 lbl_line = tk.Label(middle_frame, text="**** GAME LOG ****", font = "Helvetica 13 bold", foreground="blue").pack()
 lbl_line = tk.Label(middle_frame, text="***********************************************************").pack()
 
+#Make a frame consisting of the game information 
+round_frame = tk.Frame(middle_frame)
+lbl_round = tk.Label(round_frame, text="Round")
+lbl_round.pack()
+lbl_your_choice = tk.Label(round_frame, text="Your choice: " + "None", font = "Helvetica 13 bold")
+lbl_your_choice.pack()
+lbl_opponent_choice = tk.Label(round_frame, text="Opponent choice: " + "None")
+lbl_opponent_choice.pack()
+lbl_result = tk.Label(round_frame, text=" ", foreground="blue", font = "Helvetica 14 bold")
+lbl_result.pack()
+round_frame.pack(side=tk.TOP)
+
 #Make buttons
 def enable_disable_buttons(todo):
     if todo == "disable":

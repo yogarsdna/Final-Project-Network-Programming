@@ -53,6 +53,16 @@ lbl_your_name.grid(row=0, column=0, padx=5, pady=8)
 lbl_opponent_name.grid(row=1, column=0, padx=5, pady=8)
 top_left_frame.pack(side=tk.LEFT, padx=(10, 10))
 
+#Make a frame on the right for the timer 
+top_right_frame = tk.Frame(top_frame, highlightbackground="green", highlightcolor="green", highlightthickness=1)
+lbl_game_round = tk.Label(top_right_frame, text="Game round (x) starts in", foreground="blue", font = "Helvetica 14 bold")
+lbl_timer = tk.Label(top_right_frame, text=" ", font = "Helvetica 24 bold", foreground="blue")
+lbl_game_round.grid(row=0, column=0, padx=5, pady=5)
+lbl_timer.grid(row=1, column=0, padx=5, pady=5)
+top_right_frame.pack(side=tk.RIGHT, padx=(10, 10))
+
+top_frame.pack_forget()
+
 #Make buttons
 def enable_disable_buttons(todo):
     if todo == "disable":

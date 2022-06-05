@@ -137,9 +137,13 @@ def game_logic(you, opponent):
 #Make buttons
 def enable_disable_buttons(todo):
     if todo == "disable":
-        pass
+        btn_rock.config(state=tk.DISABLED)
+        btn_paper.config(state=tk.DISABLED)
+        btn_scissors.config(state=tk.DISABLED)
     else:
-        pass
+        btn_rock.config(state=tk.NORMAL)
+        btn_paper.config(state=tk.NORMAL)
+        btn_scissors.config(state=tk.NORMAL)
 
 #Connect client's name
 def connect():
@@ -156,9 +160,17 @@ def count_down(my_timer, nothing):
     if game_round <= TOTAL_NO_OF_ROUNDS:
         game_round = game_round + 1
 
+    lbl_game_round["text"] = "Game round " + str(game_round) + " starts in"
+
     while my_timer > 0:
-        pass
+        my_timer = my_timer - 1
+        print("game timer is: " + str(my_timer))
+        lbl_timer["text"] = my_timer
+        sleep(1)
+
     enable_disable_buttons("enable")
+    lbl_round["text"] = "Round - " + str(game_round)
+    lbl_final_result["text"] = ""
 
 #Make choice function to let the client's know which move they pick
 def choice(arg):

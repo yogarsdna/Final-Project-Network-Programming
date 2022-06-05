@@ -21,10 +21,10 @@ window.title("Server")
 
 #Top frame
 topFrame = tk.Frame(window)
-btnStart = tk.Button(topFrame, text="Start", foreground="grey", command=lambda : start_server())
+btnStart = tk.Button(topFrame, text="Start", foreground="green", command=lambda : start_server())
 btnStart.pack(side=tk.LEFT)
 btnStart.configure(fg="grey")
-btnStop = tk.Button(topFrame, text="Stop", foreground="grey", command=lambda : stop_server(), state=tk.DISABLED)
+btnStop = tk.Button(topFrame, text="Stop", foreground="red", command=lambda : stop_server(), state=tk.DISABLED)
 btnStop.pack(side=tk.LEFT)
 topFrame.pack(side=tk.TOP, pady=(5, 0))
 
@@ -38,7 +38,7 @@ middleFrame.pack(side=tk.TOP, pady=(5, 0))
 
 #The client frame
 clientFrame = tk.Frame(window)
-lblLine = tk.Label(clientFrame, text="**********Client List**********").pack()
+lblLine = tk.Label(clientFrame, text=">>>>>>>>>>Client List<<<<<<<<<<").pack()
 scrollBar = tk.Scrollbar(clientFrame)
 scrollBar.pack(side=tk.RIGHT, fill=tk.Y)
 tkDisplay = tk.Text(clientFrame, height=10, width=30)

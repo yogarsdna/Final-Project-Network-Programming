@@ -21,9 +21,9 @@ window.title("Server")
 
 #Top frame
 topFrame = tk.Frame(window)
-btnStart = tk.Button(topFrame, text="Start", foreground="green", command=lambda : start_server())
+btnStart = tk.Button(topFrame, text="Start", foreground="blue", command=lambda : start_server())
 btnStart.pack(side=tk.LEFT)
-btnStart.configure(fg="grey")
+btnStart.configure(fg="blue")
 btnStop = tk.Button(topFrame, text="Stop", foreground="red", command=lambda : stop_server(), state=tk.DISABLED)
 btnStop.pack(side=tk.LEFT)
 topFrame.pack(side=tk.TOP, pady=(5, 0))

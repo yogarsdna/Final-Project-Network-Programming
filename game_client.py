@@ -93,9 +93,9 @@ middle_frame.pack_forget()
 
 #Display the buttons
 button_frame = tk.Frame(window_main)
-photo_rock = PhotoImage(file=r"rock.gif")
-photo_paper = PhotoImage(file = r"paper.gif")
-photo_scissors = PhotoImage(file = r"scissors.gif")
+photo_rock = PhotoImage(file=r"images/rock.gif")
+photo_paper = PhotoImage(file = r"images/paper.gif")
+photo_scissors = PhotoImage(file = r"images/scissors.gif")
 
 #Make a frame for the buttons 
 btn_rock = tk.Button(button_frame, text="Rock", command=lambda : choice("rock"), state=tk.DISABLED, image=photo_rock)
@@ -152,6 +152,7 @@ def connect():
         tk.messagebox.showerror(title="ERROR!!!", message="You MUST enter your first name <e.g. John>")
     else:
         your_name = ent_name.get()
+        lbl_your_name["text"] = "Your name: " + your_name
         connect_to_server(your_name)
 
 #Make count down function for the timer
@@ -195,7 +196,7 @@ def connect_to_server(name):
         btn_connect.config(state=tk.DISABLED)
         ent_name.config(state=tk.DISABLED)
         lbl_name.config(state=tk.DISABLED)
-
+        enable_disable_buttons("disable")
 
         threading._start_new_thread(receive_message_from_server, (client, "m"))
 
@@ -210,7 +211,8 @@ def receive_message_from_server(sck, m):
     while True:
         from_server = sck.recv(4096).decode()
 
-        if not from_server: break
+        if not from_server: 
+            break
 
         if from_server.startswith("welcome"):
             if from_server == "welcome1":
@@ -218,17 +220,62 @@ def receive_message_from_server(sck, m):
             elif from_server == "welcome2":
                 lbl_welcome["text"] = "Server says: Welcome " + your_name + "! Game will start soon"
             lbl_line_server.pack()
-        
+
         elif from_server.startswith(":"):
             opponent_name = from_server.replace("opponent_name$", "")
+            lbl_opponent_name["text"] = "Opponent: " + opponent_name
+            top_frame.pack()
+            middle_frame.pack()
+
             #We know two users are connected so game is ready to start
-    
+            threading._start_new_thread(count_down, (game_timer, ""))
             lbl_welcome.config(state=tk.DISABLED)
             lbl_line_server.config(state=tk.DISABLED)
 
         elif from_server.startswith("$opponent_choice"):
             #Get the opponent choice from the server
             opponent_choice = from_server.replace("$opponent_choice", "")
+
+            #Figure out who wins in this round
+            who_wins = game_logic(your_choice, opponent_choice)
+            round_result = " "
+            if who_wins == "you":
+                your_score = your_score + 1
+                round_result = "WIN"
+            elif who_wins == "opponent":
+                opponent_score = opponent_score + 1
+                round_result = "LOSS"
+            else:
+                round_result = "DRAW"
+
+            #Update GUI
+            lbl_opponent_choice["text"] = "Opponent choice: " + opponent_choice
+            lbl_result["text"] = "Result: " + round_result
+
+            #Is this the last round e.g. Round 5?
+            if game_round == TOTAL_NO_OF_ROUNDS:
+                #Compute final result
+                final_result = ""
+                color = ""
+
+                if your_score > opponent_score:
+                    final_result = "(You Won!!!)"
+                    color = "green"
+                elif your_score < opponent_score:
+                    final_result = "(You Lost!!!)"
+                    color = "red"
+                else:
+                    final_result = "(Draw!!!)"
+                    color = "black"
+
+                lbl_final_result["text"] = "FINAL RESULT: " + str(your_score) + " - " + str(opponent_score) + " " + final_result
+                lbl_final_result.config(foreground=color)
+
+                enable_disable_buttons("disable")
+                game_round = 0
+
+            #Start the timer
+            threading._start_new_thread(count_down, (game_timer, ""))
 
     sck.close()
 

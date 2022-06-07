@@ -88,9 +88,9 @@ def send_receive_client_message(client_connection, client_ip_addr):
     #Send welcome message to client
     client_name = client_connection.recv(4096).decode()
     if len(clients) == 1:
-        client_connection.send(b"1")
+        client_connection.send(b"welcome1")
     elif len(clients) == 2:
-        client_connection.send(b"2")
+        client_connection.send(b"welcome2")
 
     clients_names.append(client_name)
     update_client_names_display(clients_names) 

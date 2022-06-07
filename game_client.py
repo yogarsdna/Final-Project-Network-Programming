@@ -216,12 +216,12 @@ def receive_message_from_server(sck, m):
 
         if from_server.startswith("welcome"):
             if from_server == "welcome1":
-                lbl_welcome["text"] = "Server says: Welcome " + your_name + "! Waiting for player 2"
+                lbl_welcome["text"] = ("Server says: Welcome " + your_name + "! Waiting for player 2")
             elif from_server == "welcome2":
-                lbl_welcome["text"] = "Server says: Welcome " + your_name + "! Game will start soon"
+                lbl_welcome["text"] = ("Server says: Welcome " + your_name + "! Game will start soon")
             lbl_line_server.pack()
 
-        elif from_server.startswith(":"):
+        elif from_server.startswith("opponent_name$"):
             opponent_name = from_server.replace("opponent_name$", "")
             lbl_opponent_name["text"] = "Opponent: " + opponent_name
             top_frame.pack()
@@ -273,6 +273,8 @@ def receive_message_from_server(sck, m):
 
                 enable_disable_buttons("disable")
                 game_round = 0
+                your_score = 0
+                opponent_score = 0
 
             #Start the timer
             threading._start_new_thread(count_down, (game_timer, ""))

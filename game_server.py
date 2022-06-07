@@ -13,7 +13,7 @@ client_name = " "
 clients = []
 clients_names = []
 player_data = []
-num_players = 2
+
 
 #initialize frame
 window = tk.Tk()
@@ -73,7 +73,7 @@ def stop_server():
 #Accept client requests
 def accept_clients(the_server, y):
     while True:
-        if len(clients) < num_players:
+        if len(clients) < 2:
             client, addr = the_server.accept()
             clients.append(client)
 
@@ -95,7 +95,7 @@ def send_receive_client_message(client_connection, client_ip_addr):
     clients_names.append(client_name)
     update_client_names_display(clients_names) 
 
-    if len(clients) >= num_players:
+    if len(clients) > 1:
         sleep(1)
 
         #Send opponent name
@@ -116,10 +116,10 @@ def send_receive_client_message(client_connection, client_ip_addr):
             "socket": client_connection
         }
 
-        if len(player_data) < num_players:
+        if len(player_data) < 2:
             player_data.append(msg)
 
-        if len(player_data) == num_players:
+        if len(player_data) == 2:
             #Send player 1 choice to player 2 and vice versa
             opponent_choice = "1:" + player_data[1].get("choice")
             player_data[0].get("socket").send(opponent_choice.encode())

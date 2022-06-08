@@ -87,10 +87,10 @@ def send_receive_client_message(client_connection, client_ip_addr):
 
     #Send welcome message to client
     client_name = client_connection.recv(4096).decode()
-    if len(clients) == 1:
-        client_connection.send(b"welcome1")
-    elif len(clients) == 2:
-        client_connection.send(b"welcome2")
+    if len(clients) < 2:
+        client_connection.send("welcome1".encode())
+    else:
+        client_connection.send("welcome2".encode())
 
     clients_names.append(client_name)
     update_client_names_display(clients_names) 
@@ -99,10 +99,8 @@ def send_receive_client_message(client_connection, client_ip_addr):
         sleep(1)
 
         #Send opponent name
-        opponent_name = "opponent_name$" + clients_names[1]
-        clients[0].send(opponent_name.encode())
-        opponent_name = "opponent_name$" + clients_names[0]
-        clients[1].send(opponent_name.encode())
+        clients[0].send(("opponent_name$" + clients_names[1]).encode())
+        clients[1].send(("opponent_name$" + clients_names[0]).encode())
     
     while True:
         data = client_connection.recv(4096).decode()
@@ -121,11 +119,10 @@ def send_receive_client_message(client_connection, client_ip_addr):
 
         if len(player_data) == 2:
             #Send player 1 choice to player 2 and vice versa
-            opponent_choice = "1:" + player_data[1].get("choice")
-            player_data[0].get("socket").send(opponent_choice.encode())
-
-            opponent_choice = "0:" + player_data[0].get("choice")
-            player_data[1].get("socket").send(opponent_choice.encode())
+            dataToSend0 = "$opponent_choice" + player_data[1].get("choice")
+            dataToSend1 = "$opponent_choice" + player_data[0].get("choice")
+            player_data[0].get("socket").send(dataToSend0.encode())
+            player_data[1].get("socket").send(dataToSend1.encode())
         
 
             player_data = []

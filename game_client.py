@@ -113,7 +113,7 @@ def game_logic(you, opponent):
     paper = "paper"
     scissors = "scissors"
     player0 = "you"
-    player1 = "op1"
+    player1 = "opponent"
 
     if you == opponent:
         winner = "draw"

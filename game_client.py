@@ -66,16 +66,16 @@ top_frame.pack_forget()
 #Middle frame consisting "GAME LOG" text 
 middle_frame = tk.Frame(window_main)
 lbl_line = tk.Label(middle_frame, text="***********************************************************").pack()
-lbl_line = tk.Label(middle_frame, text="**** GAME LOG ****", font = "Helvetica 13 bold", foreground="blue").pack()
+lbl_line = tk.Label(middle_frame, text="**** GAME INFO ****", font = "Helvetica 13 bold", foreground="blue").pack()
 lbl_line = tk.Label(middle_frame, text="***********************************************************").pack()
 
 #Make a frame consisting of the game information 
 round_frame = tk.Frame(middle_frame)
 lbl_round = tk.Label(round_frame, text="Round")
 lbl_round.pack()
-lbl_your_choice = tk.Label(round_frame, text="Your choice: " + "None", font = "Helvetica 13 bold")
+lbl_your_choice = tk.Label(round_frame, text="You: " + "None", font = "Helvetica 13 bold")
 lbl_your_choice.pack()
-lbl_opponent_choice = tk.Label(round_frame, text="Opponent choice: " + "None")
+lbl_opponent_choice = tk.Label(round_frame, text="Opponent: " + "None")
 lbl_opponent_choice.pack()
 lbl_result = tk.Label(round_frame, text=" ", foreground="blue", font = "Helvetica 14 bold")
 lbl_result.pack()
@@ -152,7 +152,7 @@ def connect():
         tk.messagebox.showerror(title="ERROR!!!", message="You MUST enter your first name <e.g. John>")
     else:
         your_name = ent_name.get()
-        lbl_your_name["text"] = "Your name: " + your_name
+        lbl_your_name["text"] = "Name: " + your_name
         connect_to_server(your_name)
 
 #Make count down function for the timer
@@ -161,11 +161,11 @@ def count_down(my_timer, nothing):
     if game_round <= TOTAL_NO_OF_ROUNDS:
         game_round = game_round + 1
 
-    lbl_game_round["text"] = "Game round " + str(game_round) + " starts in"
+    lbl_game_round["text"] = "Round " + str(game_round) + " Starts In"
 
     while my_timer > 0:
         my_timer = my_timer - 1
-        print("game timer is: " + str(my_timer))
+        print("Timer: " + str(my_timer))
         lbl_timer["text"] = my_timer
         sleep(1)
 
@@ -177,7 +177,7 @@ def count_down(my_timer, nothing):
 def choice(arg):
     global your_choice, client, game_round
     your_choice = arg
-    lbl_your_choice["text"] = "Your choice: " + your_choice
+    lbl_your_choice["text"] = "You: " + your_choice
 
     if client:
         str_data = "Game_Round"+str(game_round)+your_choice
@@ -216,9 +216,9 @@ def receive_message_from_server(sck, m):
 
         if from_server.startswith("welcome"):
             if from_server == "welcome1":
-                lbl_welcome["text"] = ("Server says: Welcome " + your_name + "! Waiting for player 2")
+                lbl_welcome["text"] = ("Welcome " + your_name + "! Waiting for other player")
             elif from_server == "welcome2":
-                lbl_welcome["text"] = ("Server says: Welcome " + your_name + "! Game will start soon")
+                lbl_welcome["text"] = ("Welcome " + your_name + "! Game will start soon")
             lbl_line_server.pack()
 
         elif from_server.startswith("opponent_name$"):
@@ -242,15 +242,19 @@ def receive_message_from_server(sck, m):
             if who_wins == "you":
                 your_score = your_score + 1
                 round_result = "WIN"
+                color = "green"
             elif who_wins == "opponent":
                 opponent_score = opponent_score + 1
                 round_result = "LOSS"
+                color = "red"
             else:
                 round_result = "DRAW"
+                color = "black"
 
             #Update GUI
-            lbl_opponent_choice["text"] = "Opponent choice: " + opponent_choice
+            lbl_opponent_choice["text"] = "Opponent: " + opponent_choice
             lbl_result["text"] = "Result: " + round_result
+            lbl_result.config(foreground=color)
 
             #Is this the last round e.g. Round 5?
             if game_round == TOTAL_NO_OF_ROUNDS:

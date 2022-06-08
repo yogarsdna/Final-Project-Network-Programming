@@ -14,7 +14,6 @@ clients = []
 clients_names = []
 player_data = []
 
-
 #initialize frame
 window = tk.Tk()
 window.title("Server")

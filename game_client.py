@@ -249,7 +249,7 @@ def receive_message_from_server(sck, m):
                 color = "red"
             else:
                 round_result = "DRAW"
-                color = "black"
+                color = "yellow"
 
             #Update GUI
             lbl_opponent_choice["text"] = "Opponent: " + opponent_choice
@@ -270,7 +270,7 @@ def receive_message_from_server(sck, m):
                     color = "red"
                 else:
                     final_result = "(Draw!!!)"
-                    color = "black"
+                    color = "yellow"
 
                 lbl_final_result["text"] = "FINAL RESULT: " + str(your_score) + " - " + str(opponent_score) + " " + final_result
                 lbl_final_result.config(foreground=color)

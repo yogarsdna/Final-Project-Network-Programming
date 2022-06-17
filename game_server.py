@@ -37,7 +37,7 @@ middleFrame.pack(side=tk.TOP, pady=(5, 0))
 
 #The client frame
 clientFrame = tk.Frame(window)
-lblLine = tk.Label(clientFrame, text=">>>>>>>>>>Client List<<<<<<<<<<").pack()
+lblLine = tk.Label(clientFrame, text=">>>>>>>>>> Client List <<<<<<<<<<").pack()
 scrollBar = tk.Scrollbar(clientFrame)
 scrollBar.pack(side=tk.RIGHT, fill=tk.Y)
 tkDisplay = tk.Text(clientFrame, height=10, width=30)
